@@ -20,14 +20,6 @@ func (c *Configurator[T]) Prepend(updaters ...Updater[T]) *Configurator[T] {
 	return c
 }
 
-func Some(func (int)) {
-
-}
-
-var a = Some(func(i int) {
-	
-})
-
 func (c *Configurator[T]) Apply() T {
 	var configuration T
 
