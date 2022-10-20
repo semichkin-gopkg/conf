@@ -27,13 +27,13 @@ func WithBar(bar bool) configurator.Updater[Configuration] {
 
 func main() {
 	configs := configurator.New[Configuration]().
+		Fix(WithFoo(2)).
 		Append(WithFoo(5)).
 		Append(WithBar(true)).
+		Prepend(WithBar(false)).
 		Apply()
 
-	log.Println(configs.Foo) // 5
+	log.Println(configs.Foo) // 2
 	log.Println(configs.Bar) // true
 }
-
-
 ```
