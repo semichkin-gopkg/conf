@@ -4,7 +4,7 @@
 package main
 
 import (
-	"github.com/semichkin-gopkg/configurator"
+	"github.com/semichkin-gopkg/conf"
 	"log"
 )
 
@@ -13,25 +13,25 @@ type Configuration struct {
 	Bar bool
 }
 
-func WithFoo(foo int) configurator.Updater[Configuration] {
+func WithFoo(foo int) conf.Updater[Configuration] {
 	return func(c *Configuration) {
 		c.Foo = foo
 	}
 }
 
-func WithBar(bar bool) configurator.Updater[Configuration] {
+func WithBar(bar bool) conf.Updater[Configuration] {
 	return func(c *Configuration) {
 		c.Bar = bar
 	}
 }
 
 func main() {
-	configs := configurator.New[Configuration]().
+	configs := conf.NewBuilder[Configuration]().
 		Fix(WithFoo(2)).
 		Append(WithFoo(5)).
 		Append(WithBar(true)).
 		Prepend(WithBar(false)).
-		Apply()
+		Build()
 
 	log.Println(configs.Foo) // 2
 	log.Println(configs.Bar) // true
