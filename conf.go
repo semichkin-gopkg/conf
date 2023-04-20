@@ -7,7 +7,7 @@ type Builder[T any] struct {
 	fixedUpdaters []Updater[T]
 }
 
-func NewBuilder[T any]() *Builder[T] {
+func New[T any]() *Builder[T] {
 	return &Builder[T]{}
 }
 

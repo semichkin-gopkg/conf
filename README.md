@@ -26,7 +26,7 @@ func WithBar(bar bool) conf.Updater[Configuration] {
 }
 
 func main() {
-	configs := conf.NewBuilder[Configuration]().
+	configs := conf.New[Configuration]().
 		Fix(WithFoo(2)).
 		Append(WithFoo(5)).
 		Append(WithBar(true)).
