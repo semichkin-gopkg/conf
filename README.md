@@ -8,32 +8,31 @@ import (
 	"log"
 )
 
-type Configuration struct {
+type Conf struct {
 	Foo int
 	Bar bool
 }
 
-func WithFoo(foo int) conf.Updater[Configuration] {
-	return func(c *Configuration) {
+func WithFoo(foo int) conf.Updater[Conf] {
+	return func(c *Conf) {
 		c.Foo = foo
 	}
 }
 
-func WithBar(bar bool) conf.Updater[Configuration] {
-	return func(c *Configuration) {
+func WithBar(bar bool) conf.Updater[Conf] {
+	return func(c *Conf) {
 		c.Bar = bar
 	}
 }
 
 func main() {
-	configs := conf.New[Configuration]().
-		Fix(WithFoo(2)).
+	configs := conf.New[Conf]().
 		Append(WithFoo(5)).
 		Append(WithBar(true)).
 		Prepend(WithBar(false)).
 		Build()
 
-	log.Println(configs.Foo) // 2
-	log.Println(configs.Bar) // true
+	log.Println(configs.Foo) // 5
+	log.Println(configs.Bar) // false
 }
 ```
